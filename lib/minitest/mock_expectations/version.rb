@@ -1,5 +1,5 @@
 module Minitest
   module MockExpectations
-    VERSION = "1.0.0"
+    VERSION = "0.9.0"
   end
 end
