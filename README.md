@@ -58,7 +58,7 @@ def setup
     body: "https://bogdanvlviv.com/posts/ruby/rails/what-is-new-in-rails-6_0.html",
     comments: [
       "Looking really good.",
-      "I'm really like this post."
+      "I really like this post."
     ]
   )
 end
