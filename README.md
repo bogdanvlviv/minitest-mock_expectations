@@ -1,6 +1,6 @@
 # minitest-mock_expectations
 
-Provides method call assertions for minitest
+Provides method call assertions for minitest.
 
 ## Installation
 
