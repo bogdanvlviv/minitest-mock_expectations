@@ -37,7 +37,7 @@ module Minitest
   #     )
   #   end
   module Assertions
-    # Asserts that the method will be called on the +object+ in the block:
+    # Asserts that the method will be called on the +object+ in the block
     #
     #   assert_called(@post, :title) do
     #     @post.title
@@ -67,7 +67,7 @@ module Minitest
       assert_equal times, times_called, error
     end
 
-    # Asserts that the method will not be called on the +object+ in the block:
+    # Asserts that the method will not be called on the +object+ in the block
     #
     #   refute_called(@post, :title) do
     #     @post.body
@@ -78,7 +78,7 @@ module Minitest
 
     alias assert_not_called refute_called
 
-    # Asserts that the method will be called with the +arguments+ on the +object+ in the block:
+    # Asserts that the method will be called with the +arguments+ on the +object+ in the block
     #
     #   assert_called_with(@post, :add_comment, ["Thanks for sharing this."]) do
     #     @post.add_comment("Thanks for sharing this.")
@@ -112,7 +112,7 @@ module Minitest
       mock.verify
     end
 
-    # Asserts that the method will be called on an instance of the +klass+ in the block:
+    # Asserts that the method will be called on an instance of the +klass+ in the block
     #
     #   assert_called_on_instance_of(Post, :title) do
     #     @post.title
@@ -168,7 +168,7 @@ module Minitest
       klass.send(:undef_method, "stubbed_#{method_name}")
     end
 
-    # Asserts that the method will not be called on an instance of the +klass+ in the block:
+    # Asserts that the method will not be called on an instance of the +klass+ in the block
     #
     #   refute_called_on_instance_of(Post, :title) do
     #     @post.body

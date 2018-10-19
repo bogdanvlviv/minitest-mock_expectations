@@ -66,7 +66,7 @@ end
 
 ### assert_called(object, method_name, message = nil, times: 1, returns: nil)
 
-Asserts that the method will be called on the `object` in the block:
+Asserts that the method will be called on the `object` in the block
 
 ```ruby
 assert_called(@post, :title) do
@@ -95,7 +95,7 @@ assert_equal "What is new in Rails 6.0", @object.title
 
 ### refute_called(object, method_name, message = nil, &block)
 
-Asserts that the method will not be called on the `object` in the block:
+Asserts that the method will not be called on the `object` in the block
 
 ```ruby
 refute_called(@post, :title) do
@@ -109,7 +109,7 @@ Alias for `refute_called`.
 
 ### assert_called_with(object, method_name, arguments, returns: nil)
 
-Asserts that the method will be called with the `arguments` on the `object` in the block:
+Asserts that the method will be called with the `arguments` on the `object` in the block
 
 ```ruby
 assert_called_with(@post, :add_comment, ["Thanks for sharing this."]) do
@@ -138,7 +138,7 @@ end
 
 ### assert_called_on_instance_of(klass, method_name, message = nil, times: 1, returns: nil)
 
-Asserts that the method will be called on an instance of the `klass` in the block:
+Asserts that the method will be called on an instance of the `klass` in the block
 
 ```ruby
 assert_called_on_instance_of(Post, :title) do
@@ -181,7 +181,7 @@ end
 
 ### refute_called_on_instance_of(klass, method_name, message = nil, &block)
 
-Asserts that the method will not be called on an instance of the `klass` in the block:
+Asserts that the method will not be called on an instance of the `klass` in the block
 
 ```ruby
 refute_called(@post, :title) do
