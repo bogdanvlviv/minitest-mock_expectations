@@ -184,7 +184,7 @@ end
 Asserts that the method will not be called on an instance of the `klass` in the block
 
 ```ruby
-refute_called(@post, :title) do
+refute_called_on_instance_of(Post, :title) do
   @post.body
 end
 ```
@@ -194,6 +194,7 @@ Use nesting of the blocks in order assert that the several methods will not be c
 ```ruby
 refute_called_on_instance_of(Post, :title) do
   refute_called_on_instance_of(Post, :body) do
+    @post.add_comment("Thanks for sharing this.")
   end
 end
 ```
