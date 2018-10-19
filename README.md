@@ -49,7 +49,7 @@ class Post
 end
 ```
 
-and variable `@post` that reffers to instance of `Post`:
+And variable `@post` that reffers to instance of `Post`:
 
 ```ruby
 def setup
