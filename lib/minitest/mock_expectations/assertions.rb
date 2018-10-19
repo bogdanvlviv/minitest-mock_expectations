@@ -3,7 +3,7 @@ require "minitest/assertions"
 require "minitest/mock"
 
 module Minitest
-  # Provides method call assertions
+  # Provides method call assertions for minitest
   #
   # Imagine we have model +Post+:
   #
@@ -37,13 +37,13 @@ module Minitest
   #     )
   #   end
   module Assertions
-    # Asserts that the method will be called once on the object in the block:
+    # Asserts that the method will be called on the +object+ in the block:
     #
-    #   assert_called @post, :title do
+    #   assert_called(@post, :title) do
     #     @post.title
     #   end
     #
-    # In order to assert that the method will be called multiple times on the object in the block set +:times+ option:
+    # In order to assert that the method will be called multiple times on the +object+ in the block set +:times+ option:
     #
     #   assert_called(@post, :title, times: 2) do
     #     @post.title
@@ -67,16 +67,18 @@ module Minitest
       assert_equal times, times_called, error
     end
 
-    # Asserts that the method will not be called on the object in the block:
+    # Asserts that the method will not be called on the +object+ in the block:
     #
-    #   assert_not_called(@post, :title) do
+    #   refute_called(@post, :title) do
     #     @post.body
     #   end
-    def assert_not_called(object, method_name, message = nil, &block)
+    def refute_called(object, method_name, message = nil, &block)
       assert_called(object, method_name, message, times: 0, &block)
     end
 
-    # Asserts that the method will be called with the arguments once on the object in the block:
+    alias assert_not_called refute_called
+
+    # Asserts that the method will be called with the +arguments+ on the +object+ in the block:
     #
     #   assert_called_with(@post, :add_comment, ["Thanks for sharing this."]) do
     #     @post.add_comment("Thanks for sharing this.")
@@ -90,19 +92,19 @@ module Minitest
     #
     #   assert_equal "Thank you!", @post.add_comment("Thanks for sharing this.")
     #
-    # You can also assert that the method will be called with different arguments once on the object in the block:
+    # You can also assert that the method will be called with different +arguments+ on the +object+ in the block:
     #
     #   assert_called_with(@post, :add_comment, [["Thanks for sharing this."], ["Thanks!"]]) do
     #     @post.add_comment("Thanks for sharing this.")
     #     @post.add_comment("Thanks!")
     #   end
-    def assert_called_with(object, method_name, args, returns: nil)
+    def assert_called_with(object, method_name, arguments, returns: nil)
       mock = Minitest::Mock.new
 
-      if args.all? { |arg| arg.is_a?(Array) }
-        args.each { |arg| mock.expect(:call, returns, arg) }
+      if arguments.all? { |argument| argument.is_a?(Array) }
+        arguments.each { |argument| mock.expect(:call, returns, argument) }
       else
-        mock.expect(:call, returns, args)
+        mock.expect(:call, returns, arguments)
       end
 
       object.stub(method_name, mock) { yield }
@@ -110,13 +112,13 @@ module Minitest
       mock.verify
     end
 
-    # Asserts that the method will be called once on an instance of the klass in the block:
+    # Asserts that the method will be called on an instance of the +klass+ in the block:
     #
-    #   assert_called_on_instance_of Post, :title do
+    #   assert_called_on_instance_of(Post, :title) do
     #     @post.title
     #   end
     #
-    # In order to assert that the method will be called multiple times on an instance of the klass in the block set +:times+ option:
+    # In order to assert that the method will be called multiple times on an instance of the +klass+ in the block set +:times+ option:
     #
     #   assert_called_on_instance_of(Post, :title, times: 2) do
     #     @post.title
@@ -131,7 +133,7 @@ module Minitest
     #
     #   assert_equal "What is new in Rails 6.0", @post.title
     #
-    # Use nesting of the blocks in order assert that the several methods will be called on an instance of the klass in the block:
+    # Use nesting of the blocks in order assert that the several methods will be called on an instance of the +klass+ in the block:
     #
     #   assert_called_on_instance_of(Post, :title, times: 3) do
     #     assert_called_on_instance_of(Post, :body, times: 2) do
@@ -166,20 +168,23 @@ module Minitest
       klass.send(:undef_method, "stubbed_#{method_name}")
     end
 
-    # Asserts that the method will not be called once on an instance of the klass in the block:
+    # Asserts that the method will not be called on an instance of the +klass+ in the block:
     #
-    #   assert_not_called(@post, :title) do
+    #   refute_called_on_instance_of(Post, :title) do
     #     @post.body
     #   end
     #
-    # Use nesting of the blocks in order assert that the several methods will not be called on an instance of the klass in the block:
+    # Use nesting of the blocks in order assert that the several methods will not be called on an instance of the +klass+ in the block:
     #
-    #   assert_not_called_on_instance_of(Post, :title) do
-    #     assert_not_called_on_instance_of(Post, :body) do
+    #   refute_called_on_instance_of(Post, :title) do
+    #     refute_called_on_instance_of(Post, :body) do
+    #       @post.add_comment("Thanks for sharing this.")
     #     end
     #   end
-    def assert_not_called_on_instance_of(klass, method_name, message = nil, &block)
+    def refute_called_on_instance_of(klass, method_name, message = nil, &block)
       assert_called_on_instance_of(klass, method_name, message, times: 0, &block)
     end
+
+    alias assert_not_called_on_instance_of refute_called_on_instance_of
   end
 end

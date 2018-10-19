@@ -1,13 +1,13 @@
 # minitest-mock_expectations
 
-Provides method call assertions.
+Provides method call assertions for minitest
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'minitest-mock_expectations'
+gem "minitest-mock_expectations"
 ```
 
 And then execute:
@@ -64,17 +64,17 @@ def setup
 end
 ```
 
-### assert_called
+### assert_called(object, method_name, message = nil, times: 1, returns: nil)
 
-Asserts that the method will be called once on the object in the block:
+Asserts that the method will be called on the `object` in the block:
 
 ```ruby
-assert_called @post, :title do
+assert_called(@post, :title) do
   @post.title
 end
 ```
 
-In order to assert that the method will be called multiple times on the object in the block set `:times` option:
+In order to assert that the method will be called multiple times on the `object` in the block set `:times` option:
 
 ```ruby
 assert_called(@post, :title, times: 2) do
@@ -93,19 +93,23 @@ end
 assert_equal "What is new in Rails 6.0", @object.title
 ```
 
-### assert_not_called
+### refute_called(object, method_name, message = nil, &block)
 
-Asserts that the method will not be called on the object in the block:
+Asserts that the method will not be called on the `object` in the block:
 
 ```ruby
-assert_not_called(@post, :title) do
+refute_called(@post, :title) do
   @post.body
 end
 ```
 
-### assert_called_with
+### assert_not_called
 
-Asserts that the method will be called with the arguments once on the object in the block:
+Alias for `refute_called`.
+
+### assert_called_with(object, method_name, arguments, returns: nil)
+
+Asserts that the method will be called with the `arguments` on the `object` in the block:
 
 ```ruby
 assert_called_with(@post, :add_comment, ["Thanks for sharing this."]) do
@@ -123,7 +127,7 @@ end
 assert_equal "Thank you!", @post.add_comment("Thanks for sharing this.")
 ```
 
-You can also assert that the method will be called with different arguments once on the object in the block:
+You can also assert that the method will be called with different `arguments` on the `object` in the block:
 
 ```ruby
 assert_called_with(@post, :add_comment, [["Thanks for sharing this."], ["Thanks!"]]) do
@@ -132,17 +136,17 @@ assert_called_with(@post, :add_comment, [["Thanks for sharing this."], ["Thanks!
 end
 ```
 
-### assert_called_on_instance_of
+### assert_called_on_instance_of(klass, method_name, message = nil, times: 1, returns: nil)
 
-Asserts that the method will be called once on an instance of the klass in the block:
+Asserts that the method will be called on an instance of the `klass` in the block:
 
 ```ruby
-assert_called_on_instance_of Post, :title do
+assert_called_on_instance_of(Post, :title) do
   @post.title
 end
 ```
 
-In order to assert that the method will be called multiple times on an instance of the klass in the block set `:times` option:
+In order to assert that the method will be called multiple times on an instance of the `klass` in the block set `:times` option:
 
 ```ruby
 assert_called_on_instance_of(Post, :title, times: 2) do
@@ -161,7 +165,7 @@ end
 assert_equal "What is new in Rails 6.0", @post.title
 ```
 
-Use nesting of the blocks in order assert that the several methods will be called on an instance of the klass in the block:
+Use nesting of the blocks in order assert that the several methods will be called on an instance of the `klass` in the block:
 
 ```ruby
 assert_called_on_instance_of(Post, :title, times: 3) do
@@ -175,24 +179,28 @@ assert_called_on_instance_of(Post, :title, times: 3) do
 end
 ```
 
-### assert_not_called_on_instance_of
+### refute_called_on_instance_of(klass, method_name, message = nil, &block)
 
-Asserts that the method will not be called once on an instance of the klass in the block:
+Asserts that the method will not be called on an instance of the `klass` in the block:
 
 ```ruby
-assert_not_called(@post, :title) do
+refute_called(@post, :title) do
   @post.body
 end
 ```
 
-Use nesting of the blocks in order assert that the several methods will not be called on an instance of the klass in the block:
+Use nesting of the blocks in order assert that the several methods will not be called on an instance of the `klass` in the block:
 
 ```ruby
-assert_not_called_on_instance_of(Post, :title) do
-  assert_not_called_on_instance_of(Post, :body) do
+refute_called_on_instance_of(Post, :title) do
+  refute_called_on_instance_of(Post, :body) do
   end
 end
 ```
+
+### assert_not_called_on_instance_of
+
+Alias for `refute_called_on_instance_of`.
 
 ## Contributing
 

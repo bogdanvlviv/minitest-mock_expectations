@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["bogdanvlviv"]
   spec.email         = ["bogdanvlviv@gmail.com"]
 
-  spec.summary       = "Provides method call assertions"
+  spec.summary       = "Provides method call assertions for minitest"
   spec.description   = ""
   spec.homepage      = "https://github.com/bogdanvlviv/minitest-mock_expectations"
   spec.license       = "MIT"

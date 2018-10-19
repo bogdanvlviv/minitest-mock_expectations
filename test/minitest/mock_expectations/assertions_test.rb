@@ -30,7 +30,7 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
   end
 
   def test_assert_called_with_defaults_to_expect_once
-    assert_called @post, :title do
+    assert_called(@post, :title) do
       @post.title
     end
   end
@@ -59,35 +59,51 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
   def test_assert_called_failure
     error = assert_raises(Minitest::Assertion) do
       assert_called(@post, :title) do
+        @post.body
       end
     end
 
     assert_equal "Expected title to be called 1 times, but was called 0 times.\nExpected: 1\n  Actual: 0", error.message
   end
 
-  def test_assert_not_called
-    assert_not_called(@post, :title) do
-      @post.body
-    end
-  end
-
-  def test_assert_not_called_failure
-    error = assert_raises(Minitest::Assertion) do
-      assert_not_called(@post, :title) do
-        @post.title
-      end
-    end
-
-    assert_equal "Expected title to be called 0 times, but was called 1 times.\nExpected: 0\n  Actual: 1", error.message
-  end
-
   def test_assert_called_with_message
     error = assert_raises(Minitest::Assertion) do
       assert_called(@post, :title, "Message") do
+        @post.body
       end
     end
 
     assert_equal "Message.\nExpected title to be called 1 times, but was called 0 times.\nExpected: 1\n  Actual: 0", error.message
+  end
+
+  def test_refute_called
+    refute_called(@post, :title) do
+      @post.body
+    end
+  end
+
+  def test_refute_called_failure
+    error = assert_raises(Minitest::Assertion) do
+      refute_called(@post, :add_comment) do
+        @post.add_comment("Thanks for sharing this.")
+      end
+    end
+
+    assert_equal "Expected add_comment to be called 0 times, but was called 1 times.\nExpected: 0\n  Actual: 1", error.message
+  end
+
+  def test_refute_called_with_message
+    error = assert_raises(Minitest::Assertion) do
+      refute_called(@post, :title, "Message") do
+        @post.title
+      end
+    end
+
+    assert_equal "Message.\nExpected title to be called 0 times, but was called 1 times.\nExpected: 0\n  Actual: 1", error.message
+  end
+
+  def test_assert_not_called_is_alias_for_refute_called
+    assert method(:assert_not_called).eql?(method(:refute_called))
   end
 
   def test_assert_called_with_arguments
@@ -120,7 +136,7 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
   end
 
   def test_assert_called_on_instance_of_with_defaults_to_expect_once
-    assert_called_on_instance_of Post, :title do
+    assert_called_on_instance_of(Post, :title) do
       @post.title
     end
   end
@@ -149,6 +165,7 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
   def test_assert_called_on_instance_of_failure
     error = assert_raises(Minitest::Assertion) do
       assert_called_on_instance_of(Post, :title) do
+        @post.body
       end
     end
 
@@ -158,6 +175,7 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
   def test_assert_called_on_instance_of_with_message
     error = assert_raises(Minitest::Assertion) do
       assert_called_on_instance_of(Post, :title, "Message") do
+        @post.body
       end
     end
 
@@ -176,26 +194,41 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
     end
   end
 
-  def test_assert_not_called_on_instance_of
-    assert_not_called_on_instance_of(Post, :title) do
+  def test_refute_called_on_instance_of
+    refute_called_on_instance_of(Post, :title) do
       @post.body
     end
   end
 
-  def test_assert_not_called_on_instance_of_failure
+  def test_refute_called_on_instance_of_failure
     error = assert_raises(Minitest::Assertion) do
-      assert_not_called_on_instance_of(Post, :title) do
+      refute_called_on_instance_of(Post, :add_comment) do
+        @post.add_comment("Thanks for sharing this.")
+      end
+    end
+
+    assert_equal "Expected add_comment to be called 0 times, but was called 1 times.\nExpected: 0\n  Actual: 1", error.message
+  end
+
+  def test_refute_called_on_instance_of_with_message
+    error = assert_raises(Minitest::Assertion) do
+      refute_called_on_instance_of(Post, :title, "Message") do
         @post.title
       end
     end
 
-    assert_equal "Expected title to be called 0 times, but was called 1 times.\nExpected: 0\n  Actual: 1", error.message
+    assert_equal "Message.\nExpected title to be called 0 times, but was called 1 times.\nExpected: 0\n  Actual: 1", error.message
   end
 
-  def test_assert_not_called_on_instance_of_nesting
-    assert_not_called_on_instance_of(Post, :title) do
-      assert_not_called_on_instance_of(Post, :body) do
+  def test_refute_called_on_instance_of_nesting
+    refute_called_on_instance_of(Post, :title) do
+      refute_called_on_instance_of(Post, :body) do
+        @post.add_comment("Thanks for sharing this.")
       end
     end
+  end
+
+  def test_assert_called_on_instance_of_is_alias_for_refute_called
+    assert method(:assert_not_called_on_instance_of).eql?(method(:refute_called_on_instance_of))
   end
 end
