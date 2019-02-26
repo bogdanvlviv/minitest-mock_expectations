@@ -13,10 +13,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.16)
-  minitest (~> 5.0)
+  bundler
+  minitest
   minitest-mock_expectations!
-  rake (~> 10.0)
+  rake
 
 BUNDLED WITH
-   1.17.2
+   2.0.1
