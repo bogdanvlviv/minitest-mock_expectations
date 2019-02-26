@@ -1,4 +1,4 @@
-# minitest-mock_expectations
+# minitest mock expectations
 
 Provides method call assertions for minitest.
 
