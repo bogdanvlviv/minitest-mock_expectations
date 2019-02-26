@@ -147,14 +147,14 @@ module Minitest
     def assert_called_on_instance_of(klass, method_name, message = nil, times: 1, returns: nil)
       times_called = 0
 
-      klass.send(:define_method, "stubbed_#{method_name}") do |*|
+      klass.define_method("stubbed_#{method_name}") do |*|
         times_called += 1
 
         returns
       end
 
-      klass.send(:alias_method, "original_#{method_name}", method_name)
-      klass.send(:alias_method, method_name, "stubbed_#{method_name}")
+      klass.alias_method("original_#{method_name}", method_name)
+      klass.alias_method(method_name, "stubbed_#{method_name}")
 
       yield
 
@@ -163,9 +163,9 @@ module Minitest
 
       assert_equal times, times_called, error
     ensure
-      klass.send(:alias_method, method_name, "original_#{method_name}")
-      klass.send(:undef_method, "original_#{method_name}")
-      klass.send(:undef_method, "stubbed_#{method_name}")
+      klass.alias_method(method_name, "original_#{method_name}")
+      klass.undef_method("original_#{method_name}")
+      klass.undef_method("stubbed_#{method_name}")
     end
 
     # Asserts that the method will not be called on an instance of the +klass+ in the block
