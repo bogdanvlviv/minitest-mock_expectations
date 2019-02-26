@@ -1,3 +1,5 @@
+### 1.1.1 / February 26, 2019
+
 ### 1.1.0 / February 26, 2019
 
 * Drop support for Ruby < 2.5.
