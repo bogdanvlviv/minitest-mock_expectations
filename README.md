@@ -136,6 +136,38 @@ assert_called_with(@post, :add_comment, [["Thanks for sharing this."], ["Thanks!
 end
 ```
 
+```ruby
+assert_called_with(@post, :add_comment, [["Thanks for sharing this."]]) do
+  @post.add_comment(["Thanks for sharing this."])
+end
+```
+
+```ruby
+assert_called_with(@post, :add_comment, [["Thanks for sharing this.", "Thanks!"]]) do
+  @post.add_comment(["Thanks for sharing this.", "Thanks!"])
+end
+```
+
+```ruby
+assert_called_with(@post, :add_comment, [["Thanks for sharing this."], {body: "Thanks!"}]) do
+  @post.add_comment(["Thanks for sharing this."], {body: "Thanks!"})
+end
+```
+
+```ruby
+assert_called_with(@post, :add_comment, [[["Thanks for sharing this."]], [{body: "Thanks!"}]]) do
+  @post.add_comment(["Thanks for sharing this."])
+  @post.add_comment({body: "Thanks!"})
+end
+```
+
+```ruby
+assert_called_with(@post, :add_comment, [[["Thanks for sharing this."]], [["Thanks!"]]]) do
+  @post.add_comment(["Thanks for sharing this."])
+  @post.add_comment(["Thanks!"])
+end
+```
+
 ### assert_called_on_instance_of(klass, method_name, message = nil, times: 1, returns: nil)
 
 Asserts that the method will be called on an instance of the `klass` in the block
