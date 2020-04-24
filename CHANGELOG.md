@@ -1,3 +1,5 @@
+* Fix `assert_called_with` with an array as expected argument.
+
 * Fix COPYRIGHT HOLDER of LICENSE.txt.
 
 ### 1.1.1 / February 26, 2019

@@ -146,6 +146,36 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
     end
   end
 
+  def test_assert_called_with_an_array_as_expected_argument
+    assert_called_with(@post, :add_comment, [["Thanks for sharing this."]]) do
+      @post.add_comment(["Thanks for sharing this."])
+    end
+
+    assert_called_with(@post, :add_comment, [["Thanks for sharing this.", "Thanks!"]]) do
+      @post.add_comment(["Thanks for sharing this.", "Thanks!"])
+    end
+  end
+
+  def test_assert_called_with_multiple_expected_arguments_as_arrays
+    assert_called_with(@post, :add_comment, [[["Thanks for sharing this."]], [["Thanks!"]]]) do
+      @post.add_comment(["Thanks for sharing this."])
+      @post.add_comment(["Thanks!"])
+    end
+  end
+
+  def test_assert_called_with_expected_arguments_as_array_and_one_non_array_object
+    assert_called_with(@post, :add_comment, [["Thanks for sharing this."], {body: "Thanks!"}]) do
+      @post.add_comment(["Thanks for sharing this."], {body: "Thanks!"})
+    end
+  end
+
+  def test_assert_called_with_multiple_expected_arguments_as_array_and_one_non_array_object
+    assert_called_with(@post, :add_comment, [[["Thanks for sharing this."]], [{body: "Thanks!"}]]) do
+      @post.add_comment(["Thanks for sharing this."])
+      @post.add_comment({body: "Thanks!"})
+    end
+  end
+
   def test_assert_called_on_instance_of_with_defaults_to_expect_once
     assert_called_on_instance_of(Post, :title) do
       @post.title
