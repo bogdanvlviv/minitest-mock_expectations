@@ -147,12 +147,18 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
   end
 
   def test_assert_called_with_an_array_as_expected_argument
-    assert_called_with(@post, :add_comment, [["Thanks for sharing this."]]) do
+    assert_called_with(@post, :add_comment, [[["Thanks for sharing this."]]]) do
       @post.add_comment(["Thanks for sharing this."])
     end
 
-    assert_called_with(@post, :add_comment, [["Thanks for sharing this.", "Thanks!"]]) do
+    assert_called_with(@post, :add_comment, [[["Thanks for sharing this.", "Thanks!"]]]) do
       @post.add_comment(["Thanks for sharing this.", "Thanks!"])
+    end
+  end
+
+  def test_assert_called_with_expected_arguments_as_arrays
+    assert_called_with(@post, :add_comment, [[["Thanks for sharing this."], ["Thanks!"]]]) do
+      @post.add_comment(["Thanks for sharing this."], ["Thanks!"])
     end
   end
 

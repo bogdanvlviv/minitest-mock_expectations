@@ -99,12 +99,16 @@ module Minitest
     #     @post.add_comment("Thanks!")
     #   end
     #
-    #   assert_called_with(@post, :add_comment, [["Thanks for sharing this."]]) do
+    #   assert_called_with(@post, :add_comment, [[["Thanks for sharing this."]]]) do
     #     @post.add_comment(["Thanks for sharing this."])
     #   end
     #
-    #   assert_called_with(@post, :add_comment, [["Thanks for sharing this.", "Thanks!"]]) do
+    #   assert_called_with(@post, :add_comment, [[["Thanks for sharing this.", "Thanks!"]]]) do
     #     @post.add_comment(["Thanks for sharing this.", "Thanks!"])
+    #   end
+    #
+    #   assert_called_with(@post, :add_comment, [[["Thanks for sharing this."], ["Thanks!"]]]) do
+    #     @post.add_comment(["Thanks for sharing this."], ["Thanks!"])
     #   end
     #
     #   assert_called_with(@post, :add_comment, [["Thanks for sharing this."], {body: "Thanks!"}]) do
@@ -124,7 +128,7 @@ module Minitest
     def assert_called_with(object, method_name, arguments, returns: nil)
       mock = Minitest::Mock.new
 
-      if arguments.size > 1 && arguments.all? { |argument| argument.is_a?(Array) }
+      if arguments.all? { |argument| argument.is_a?(Array) }
         arguments.each { |argument| mock.expect(:call, returns, argument) }
       else
         mock.expect(:call, returns, arguments)

@@ -1,3 +1,5 @@
+* Revert "Fix `assert_called_with` with an array as expected argument.".
+
 ### 1.1.2 / April 24, 2020
 
 * Fix `assert_called_with` with an array as expected argument.
