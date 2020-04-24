@@ -137,14 +137,20 @@ end
 ```
 
 ```ruby
-assert_called_with(@post, :add_comment, [["Thanks for sharing this."]]) do
+assert_called_with(@post, :add_comment, [[["Thanks for sharing this."]]]) do
   @post.add_comment(["Thanks for sharing this."])
 end
 ```
 
 ```ruby
-assert_called_with(@post, :add_comment, [["Thanks for sharing this.", "Thanks!"]]) do
+assert_called_with(@post, :add_comment, [[["Thanks for sharing this.", "Thanks!"]]]) do
   @post.add_comment(["Thanks for sharing this.", "Thanks!"])
+end
+```
+
+```ruby
+assert_called_with(@post, :add_comment, [[["Thanks for sharing this."], ["Thanks!"]]]) do
+  @post.add_comment(["Thanks for sharing this."], ["Thanks!"])
 end
 ```
 
