@@ -1,4 +1,4 @@
-### 1.2.0 / January 7, 2022
+### 1.2.0 / January 7, 2023
 
 * Drop support for Ruby < 3.0.
 
