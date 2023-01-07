@@ -1,3 +1,7 @@
+### 1.2.0 / January 7, 2022
+
+* Drop support for Ruby < 3.0.
+
 ### 1.1.3 / April 24, 2020
 
 * Revert "Fix `assert_called_with` with an array as expected argument.".
