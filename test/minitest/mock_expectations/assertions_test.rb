@@ -21,10 +21,10 @@ class Minitest::MockExpectations::AssertionsTest < Minitest::Test
   def setup
     @post = Post.new(
       title: "What is new in Rails 6.0",
-      body: "https://bogdanvlviv.com/posts/ruby/rails/what-is-new-in-rails-6_0.html",
+      body: "https://gitlab.com/bogdanvlviv/posts/-/issues/15",
       comments: [
-        "Looking really good.",
-        "I really like this post."
+        "Wow.",
+        "I like this post."
       ]
     )
   end

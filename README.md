@@ -16,7 +16,7 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
+Or install it as:
 
 ```bash
 $ gem install minitest-mock_expectations
@@ -49,16 +49,16 @@ class Post
 end
 ```
 
-And variable `@post` that reffers to instance of `Post`:
+and `@post` variable that refers to an instance of `Post`:
 
 ```ruby
 def setup
   @post = Post.new(
     title: "What is new in Rails 6.0",
-    body: "https://bogdanvlviv.com/posts/ruby/rails/what-is-new-in-rails-6_0.html",
+    body: "https://gitlab.com/bogdanvlviv/posts/-/issues/15",
     comments: [
-      "Looking really good.",
-      "I really like this post."
+      "Wow.",
+      "I like this post."
     ]
   )
 end
@@ -74,7 +74,7 @@ assert_called(@post, :title) do
 end
 ```
 
-In order to assert that the method will be called multiple times on the `object` in the block set `:times` option:
+To assert that the method will be called multiple times on the `object` in the block set `:times` option:
 
 ```ruby
 assert_called(@post, :title, times: 2) do
@@ -184,7 +184,7 @@ assert_called_on_instance_of(Post, :title) do
 end
 ```
 
-In order to assert that the method will be called multiple times on an instance of the `klass` in the block set `:times` option:
+To assert that the method will be called multiple times on an instance of the `klass` in the block set `:times` option:
 
 ```ruby
 assert_called_on_instance_of(Post, :title, times: 2) do
@@ -203,7 +203,7 @@ end
 assert_equal "What is new in Rails 6.0", @post.title
 ```
 
-Use nesting of the blocks in order assert that the several methods will be called on an instance of the `klass` in the block:
+Use nesting of the blocks to assert that the several methods will be called on an instance of the `klass` in the block:
 
 ```ruby
 assert_called_on_instance_of(Post, :title, times: 3) do
@@ -227,7 +227,7 @@ refute_called_on_instance_of(Post, :title) do
 end
 ```
 
-Use nesting of the blocks in order assert that the several methods will not be called on an instance of the `klass` in the block:
+Use nesting of the blocks to assert that the several methods will not be called on an instance of the `klass` in the block:
 
 ```ruby
 refute_called_on_instance_of(Post, :title) do
@@ -244,10 +244,6 @@ Alias for `refute_called_on_instance_of`.
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/bogdanvlviv/minitest-mock_expectations. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://contributor-covenant.org) code of conduct.
-
-## Code Status
-
-[![travis-ci](https://api.travis-ci.org/bogdanvlviv/minitest-mock_expectations.svg?branch=master)](https://travis-ci.org/bogdanvlviv/minitest-mock_expectations)
 
 ## License
 
